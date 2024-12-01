@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>groupie-tracker/Artist-details</title>
+    <link rel="stylesheet" href="style/details.css">
+</head>
+
+<body>
+    <nav class="header">
+        <a href="/">
+            <h1>{{.Artist.Name}}</h1>
+            
+        </a>
+    </nav>
+
+    <div class="container">
+        <div class="details">
+            <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
+            <p>ID: {{.Artist.ID}}</p>
+            <p>Creation Date: {{.Artist.CreationDate}}</p>
+            <p>First Album: {{.Artist.FirstAlbum}}</p>
+            <h3>Members:</h3>
+            <ul>
+                {{range .Artist.Members}}
+                <li>/ {{.}}</li>
+                {{end}}
+            </ul>
+        </div>
+
+        <div class="details2">
+            <div class="locations">
+                <h3>Locations:</h3>
+                <ul>
+                    {{range .Locations.Locations}}
+                    <li>{{.}}</li>
+                    {{end}}
+                </ul>
+            </div>
+
+            <div class="dates">
+                <h3>Concert Dates:</h3>
+                <ul>
+                    {{range .ConcertDates.Dates}}
+                    <li>{{.}}</li>
+                    {{end}}
+                </ul>
+            </div>
+
+            <div class="relations">
+                <h3>Relations:</h3>
+                <ul>
+                    {{range $key, $value := .Relations.RelatedArtists}}
+                    <li>{{$key}}:
+                        <ol>
+                            {{range $value}}
+                            {{.}}
+                            <br>
+                            {{end}}
+                        </ol>
+
+                    </li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

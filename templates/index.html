@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>groupie-tracker</title>
+    <link rel="stylesheet" href="style/home.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <a href="/">
+            <h1>Groupie Tracker</h1>
+        </a>
+
+        <form action="/" method="get" class="search-form">
+            <input type="text" list="data" name="search" placeholder="Search..." size="">
+            <datalist id="data">
+                {{range .}}
+                <option value="{{.Name}}" label="artist/band"></option>
+                <option value="{{.CreationDate}}" label="CreationDate"></option>
+                <option value="{{.FirstAlbum}}" label="FirstAlbum"></option>
+                {{range .Members}}
+                <option value="{{.}}" label="Members"></option>
+                {{end}}
+                <!-- Afficher les locations et dates -->
+
+                {{end}}
+            </datalist>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="container">
+        {{range .}}
+        <div class="card">
+            <a href="/details?ID={{.ID}}">
+                <img src="{{.Image}}" alt="{{.Name}}">
+                <h2>{{.Name}}</h2>
+            </a>
+        </div>
+        {{end}}
+    </div>
+</body>
+
+</html>
